@@ -57,7 +57,7 @@ namespace BiYeSheJi.API.Controllers
             return Ok(new { success = true, message = "注册成功" });
         }
 
-        // 新增获取用户信息的接口
+        // 获取用户信息的接口
         [HttpGet("GetUserInfo")]
         public IActionResult GetUserInfo(string userAccount)
         {
@@ -78,7 +78,29 @@ namespace BiYeSheJi.API.Controllers
                 return NotFound(new { success = false, message = "用户信息未找到" });
             }
         }
+        [HttpPost("UpdateUserInfo")]
+        public IActionResult UpdateUserInfo([FromBody] UpdateUserInfoRequest request)
+        {
+            var user = _context.StuUsers.FirstOrDefault(u => u.UserAccount == request.UserAccount);
+            if (user != null)
+            {
+                user.AvatarUrl = request.AvatarUrl;
+                user.Nickname = request.Nickname;
+                user.Gender = request.Gender;
+                user.Signature = request.Signature;
+                user.Phone = request.Phone;
+
+                _context.SaveChanges();
+
+                return Ok(new { success = true, message = "修改成功" });
+            }
+            else
+            {
+                return NotFound(new { success = false, message = "用户信息未找到" });
+            }
+        }
     }
+
 
     public class LoginRequest
     {
@@ -91,4 +113,14 @@ namespace BiYeSheJi.API.Controllers
         public string Username { get; set; }
         public string Password { get; set; }
     }
+    public class UpdateUserInfoRequest
+    {
+        public string UserAccount { get; set; }
+        public string AvatarUrl { get; set; }
+        public string Nickname { get; set; }
+        public int Gender { get; set; }
+        public string Signature { get; set; }
+        public string Phone { get; set; }
+    }
+
 }

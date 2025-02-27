@@ -1,5 +1,4 @@
-﻿// BiYeSheJi.API/Controllers/UserController.cs
-using BiYeSheJi.Entity;
+﻿using BiYeSheJi.Entity;
 using BiYeSheJi.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -78,6 +77,7 @@ namespace BiYeSheJi.API.Controllers
                 return NotFound(new { success = false, message = "用户信息未找到" });
             }
         }
+
         [HttpPost("UpdateUserInfo")]
         public IActionResult UpdateUserInfo([FromBody] UpdateUserInfoRequest request)
         {
@@ -90,6 +90,9 @@ namespace BiYeSheJi.API.Controllers
                 user.Signature = request.Signature;
                 user.Phone = request.Phone;
 
+                // 手动设置实体状态为 Modified
+                _context.Entry(user).State = EntityState.Modified;
+
                 _context.SaveChanges();
 
                 return Ok(new { success = true, message = "修改成功" });
@@ -100,7 +103,6 @@ namespace BiYeSheJi.API.Controllers
             }
         }
     }
-
 
     public class LoginRequest
     {
@@ -113,6 +115,7 @@ namespace BiYeSheJi.API.Controllers
         public string Username { get; set; }
         public string Password { get; set; }
     }
+
     public class UpdateUserInfoRequest
     {
         public string UserAccount { get; set; }
@@ -122,5 +125,4 @@ namespace BiYeSheJi.API.Controllers
         public string Signature { get; set; }
         public string Phone { get; set; }
     }
-
 }

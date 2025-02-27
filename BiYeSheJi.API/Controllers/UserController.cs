@@ -34,7 +34,6 @@ namespace BiYeSheJi.API.Controllers
         [HttpPost("Register")]
         public IActionResult Register([FromBody] RegisterRequest request)
         {
-
             // 验证用户名是否已存在
             if (_context.StuUsers.Any(u => u.UserAccount == request.Username))
             {
@@ -47,17 +46,37 @@ namespace BiYeSheJi.API.Controllers
                 UserPwd = request.Password,
                 AvatarUrl = "", // 提供默认值
                 Nickname = "",
-                Gender=0,
+                Gender = 0,
                 Signature = "",
                 Phone = ""
-
             };
 
             _context.StuUsers.Add(newUser);
             _context.SaveChanges();
 
-
             return Ok(new { success = true, message = "注册成功" });
+        }
+
+        // 新增获取用户信息的接口
+        [HttpGet("GetUserInfo")]
+        public IActionResult GetUserInfo(string userAccount)
+        {
+            var user = _context.StuUsers.FirstOrDefault(u => u.UserAccount == userAccount);
+            if (user != null)
+            {
+                return Ok(new
+                {
+                    avatarUrl = user.AvatarUrl,
+                    nickname = user.Nickname,
+                    gender = user.Gender,
+                    signature = user.Signature,
+                    phone = user.Phone
+                });
+            }
+            else
+            {
+                return NotFound(new { success = false, message = "用户信息未找到" });
+            }
         }
     }
 

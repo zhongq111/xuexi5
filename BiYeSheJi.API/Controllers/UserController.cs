@@ -1,4 +1,4 @@
-﻿using BiYeSheJi.Entity;
+using BiYeSheJi.Entity;
 using BiYeSheJi.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -19,7 +19,7 @@ namespace BiYeSheJi.API.Controllers
         [HttpPost("Login")]
         public IActionResult Login([FromBody] LoginRequest request)
         {
-            var user = _context.StuUsers.FirstOrDefault(u => u.UserAccount == request.UserAccount && u.UserPwd == request.UserPwd);
+            var user = _context.Users.FirstOrDefault(u => u.UserAccount == request.UserAccount && u.UserPwd == request.UserPwd);
             if (user != null)
             {
                 return Ok(new { success = true });
@@ -34,12 +34,12 @@ namespace BiYeSheJi.API.Controllers
         public IActionResult Register([FromBody] RegisterRequest request)
         {
             // 验证用户名是否已存在
-            if (_context.StuUsers.Any(u => u.UserAccount == request.Username))
+            if (_context.Users.Any(u => u.UserAccount == request.Username))
             {
                 return BadRequest(new { success = false, message = "用户名已存在" });
             }
 
-            var newUser = new StuUser
+            var newUser = new User
             {
                 UserAccount = request.Username,
                 UserPwd = request.Password,
@@ -50,7 +50,7 @@ namespace BiYeSheJi.API.Controllers
                 Phone = ""
             };
 
-            _context.StuUsers.Add(newUser);
+            _context.Users.Add(newUser);
             _context.SaveChanges();
 
             return Ok(new { success = true, message = "注册成功" });
@@ -60,7 +60,7 @@ namespace BiYeSheJi.API.Controllers
         [HttpGet("GetUserInfo")]
         public IActionResult GetUserInfo(string userAccount)
         {
-            var user = _context.StuUsers.FirstOrDefault(u => u.UserAccount == userAccount);
+            var user = _context.Users.FirstOrDefault(u => u.UserAccount == userAccount);
             if (user != null)
             {
                 return Ok(new
@@ -81,7 +81,7 @@ namespace BiYeSheJi.API.Controllers
         [HttpPost("UpdateUserInfo")]
         public IActionResult UpdateUserInfo([FromBody] UpdateUserInfoRequest request)
         {
-            var user = _context.StuUsers.FirstOrDefault(u => u.UserAccount == request.UserAccount);
+            var user = _context.Users.FirstOrDefault(u => u.UserAccount == request.UserAccount);
             if (user != null)
             {
                 user.AvatarUrl = request.AvatarUrl;

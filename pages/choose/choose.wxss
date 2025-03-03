@@ -1,0 +1,76 @@
+.container_menu {
+  width: 100%;
+  align-items: center;
+  padding: 20rpx 20rpx;
+  box-sizing: border-box;
+  margin-top: 20rpx;
+  display: flex; /* 使用flexbox布局 */
+  flex-wrap: wrap; /* 允许换行 */
+  justify-content: space-between; /* 子元素在主轴上两端对齐 */
+}
+
+.menu_item {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.view_image {
+  width: 100%;
+  height: 150rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.menu_image {
+  width: 120rpx;
+  height: 120rpx;
+}
+
+.menu_title {
+  font-size: 26rpx;
+}
+
+/* 模态框遮罩层 */
+.modal-mask {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* 模态框容器 */
+.modal-container {
+  background: #fff;
+  padding: 20px;
+  border-radius: 5px;
+  width: 80%;
+  max-width: 300px;
+}
+
+/* 模态框标题 */
+.modal-title {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+/* 模态框内容 */
+.modal-content {
+  font-size: 14px;
+  margin-bottom: 20px;
+}
+
+/* 模态框按钮 */
+.modal-button {
+  width: 100%;
+}

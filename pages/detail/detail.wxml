@@ -1,0 +1,42 @@
+<view class="container">
+  <view class="title">{{title}}</view>
+  <view class="content">{{content}}</view>
+  <view class="divider"></view>
+  <view>评论</view>
+  <view class="divider"></view>
+  <button bindtap="ButtonAddPost" class="bottom-button">
+    参与讨论
+  </button>
+  <view class="container1">
+    <!-- 显示评论的区域 -->
+    <view class="comments">
+      <view wx:for="{{comments}}" wx:key="index">
+        <!-- 新增：显示头像和昵称 -->
+        <image src="{{item.avatarUrl}}" class="comment-avatar"></image>
+        <text class="comment-nickname">{{item.nickname}}</text>
+        <!-- 显示评论内容 -->
+        <view bindtap="openReplyPopup" data-index="{{index}}" class="comment-content">{{item.comment}}</view>
+        <!-- 显示回复列表 -->
+        <view class="replies" wx:if="{{item.replies && item.replies.length > 0 && item.isExpanded}}">
+          <view wx:for="{{item.replies}}" wx:key="subIndex">
+            <!-- 新增：显示回复的昵称 -->
+            <text class="reply-nickname">{{item.nickname}}: </text>
+            <view class="reply">{{item.reply}}</view>
+            <!-- 回复之间的虚线分隔 -->
+            <view class="reply-divider" wx:if="{{subIndex < item.replies.length - 1}}"></view>
+          </view>
+        </view>
+        <view class="comment-divider" wx:if="{{index < comments.length - 1}}"></view>
+      </view>
+    </view>
+    <!-- 弹出的评论表单 -->
+    <view class="popup" wx:if="{{isPopupShow}}">
+      <view class="popup-content">
+        <textarea placeholder="请输入评论" bindinput="onInputChange1" maxlength="100"></textarea>
+        <text class="char-count">不要超过100字/{{textareaValue.length}}</text>
+        <button bindtap="sendComment">发送</button>
+        <button bindtap="closePopup">取消</button>
+      </view>
+    </view>
+  </view>
+</view>

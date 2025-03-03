@@ -1,0 +1,47 @@
+<view class="container_menu">
+  <view class="menu_item" bindtap="onCourseSelect" data-course="社会安全">
+    <view class="view_image">
+      <image class="menu_image" src="../../tupiansucai/tp12.png"></image>
+    </view>
+    <view class="menu_title">社会安全</view>
+  </view>
+  <view class="menu_item" bindtap="onCourseSelect" data-course="个人安全">
+    <view class="view_image">
+      <image class="menu_image" src="../../tupiansucai/tp13.png"></image>
+    </view>
+    <view class="menu_title">个人安全</view>
+  </view>
+  <view class="menu_item" bindtap="onCourseSelect" data-course="网络安全">
+    <view class="view_image">
+      <image class="menu_image" src="../../tupiansucai/tp15.png"></image>
+    </view>
+    <view class="menu_title">网络安全</view>
+  </view>
+  <view class="menu_item" bindtap="onCourseSelect" data-course="食品安全">
+    <view class="view_image">
+      <image class="menu_image" src="../../tupiansucai/tp16.png"></image>
+    </view>
+    <view class="menu_title">食品安全</view>
+  </view>
+  <view class="menu_item" bindtap="onCourseSelect" data-course="交通安全">
+    <view class="view_image">
+      <image class="menu_image" src="../../tupiansucai/tp17.png"></image>
+    </view>
+    <view class="menu_title">交通安全</view>
+  </view>
+  <view class="menu_item" bindtap="onCourseSelect" data-course="环境安全">
+    <view class="view_image">
+      <image class="menu_image" src="../../tupiansucai/tp18.png"></image>
+    </view>
+    <view class="menu_title">环境安全</view>
+  </view>
+</view>
+
+<!-- 课程简介模态框 -->
+<view class="modal-mask" hidden="{{!showModal}}" bindtap="hideModal">
+  <view class="modal-container">
+    <view class="modal-title">{{selectedCourse}} 课程简介</view>
+    <view class="modal-content">{{courseDescriptions[selectedCourse]}}</view>
+    <button class="modal-button" bindtap="onSelectCourse">选课</button>
+  </view>
+</view>

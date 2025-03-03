@@ -1,0 +1,12 @@
+<!-- discuss.wxml -->
+<view class="container">
+  <view class="rectangle" wx:for="{{rectangleData}}" wx:key="index" bindtap="navigateToDetail" data-index="{{index}}">
+  <view class="title">
+    {{item.title}}
+    <image src="{{item.avatarUrl}}" class="avatar"></image>
+    <text>{{item.nickname}}</text>
+  </view>
+  <view class="content">{{item.content}}</view>
+</view>
+  <button bindtap="ButtonAddPost">添加帖子</button>
+</view>

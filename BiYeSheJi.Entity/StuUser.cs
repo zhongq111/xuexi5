@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BiYeSheJi.Entity
 {
-    public class StuUser
+    public class User
     {
         public int Id { get; set; }
         public string UserAccount { get; set; }
